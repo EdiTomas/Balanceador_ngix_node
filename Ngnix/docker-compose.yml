@@ -1,0 +1,32 @@
+version: '3'
+services:
+  aplicacion1:
+    restart: always
+    build: ./Aplicacion1
+    ports:
+      - '81:3001'
+    volumes:
+       - ./Aplicacion1:/usr/src/app1  
+  aplicacion2:
+    restart: always
+    build: ./Aplicacion2
+    ports:
+      - '82:3002'
+    volumes:
+       - ./Aplicacion2:/usr/src/app2  
+  aplicacion3:
+    restart: always
+    build: ./Aplicacion3
+    ports:
+      - '83:3003'
+    volumes:
+      - ./Aplicacion3:/usr/src/app3  
+  nginx:
+    build: ./ApiNgnix
+    ports:
+    - '80:80'
+    depends_on:
+    - aplicacion1
+    - aplicacion2
+    - aplicacion3
+    
